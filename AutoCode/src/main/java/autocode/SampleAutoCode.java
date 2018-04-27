@@ -3,13 +3,12 @@ package autocode;
 import dagger.Component;
 import dagger.Module;
 import dagger.Provides;
+import lhsrobotapi.autocode.AutoCode;
 import lhsrobotapi.robot.RobotDrivetrain;
-import lhsrobotapi.robot.SimulatedRobotDrivetrain;
+import lhsrobotapi.robot.IdealRobotDrivetrain;
 
-public class SampleAutoCode
+public class SampleAutoCode extends AutoCode
 {
-    private RobotDrivetrain drivetrain;
-
     @Component(modules = SampleModule.class) interface SampleComponent
     {
         RobotDrivetrain getDrivetrain();
@@ -20,7 +19,7 @@ public class SampleAutoCode
     {
         @Provides RobotDrivetrain requestDrivetrain()
         {
-            return new SimulatedRobotDrivetrain();
+            return new IdealRobotDrivetrain();
         }
     }
 
@@ -32,7 +31,7 @@ public class SampleAutoCode
         autocode.run();
     }
 
-    private void run()
+    public void run()
     {
         drivetrain.driveForward(100);
         System.out.println(drivetrain.getYTranslation());

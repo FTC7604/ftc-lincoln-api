@@ -3,12 +3,12 @@ package lhsrobotapi;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import lhsrobotapi.robot.SimulatedRobotDrivetrainTest;
+import lhsrobotapi.robot.IdealRobotDrivetrainTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses
 ({
-    SimulatedRobotDrivetrainTest.class
+    IdealRobotDrivetrainTest.class
 })
 public class LHSRobotAPITestSuite
 {

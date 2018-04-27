@@ -11,14 +11,12 @@ buildscript {
 
 apply plugin: 'java-library'
 apply plugin: "net.ltgt.apt"
+apply plugin: "idea"
 
 repositories {
     mavenCentral()
 }
 
-sourceSets {
-    main.java.srcDirs += 'build/generated/source/apt/main'
-}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -27,5 +25,5 @@ dependencies {
     apt 'com.google.dagger:dagger-compiler:2.15'
 }
 
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
