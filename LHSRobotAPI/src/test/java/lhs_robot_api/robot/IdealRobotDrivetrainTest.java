@@ -1,8 +1,6 @@
-package lhsrobotapi.robot;
+package lhs_robot_api.robot;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class IdealRobotDrivetrainTest
 {

@@ -1,6 +1,4 @@
-package lhsrobotapi.robot;
-
-import static org.junit.Assert.*;
+package lhs_robot_api.robot;
 
 public class RobotDrivetrainTest
 {

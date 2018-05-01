@@ -1,9 +1,9 @@
-package lhsrobotapi;
+package lhs_robot_api;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import lhsrobotapi.robot.IdealRobotDrivetrainTest;
+import lhs_robot_api.robot.IdealRobotDrivetrainTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses
