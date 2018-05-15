@@ -1,211 +1,69 @@
 package lhs_robot_api;
 
 /**
- * Allows robot controllers to be used through this interface.
- * This allows the controller to work in multiple environments.
- *
- * CopyRight 2018 bsteele.com
- * User: bob
- * Date: 3/11/18
+ * Defines an interface to allow control of an FTC robot.
  */
-public abstract class RobotAutonomousControl
+public interface RobotAutonomousControl
 {
-    private static final double DEFAULT_MAX_SPEED = 60; // cm/s
-    private static final double DEFAULT_MAX_ANGULAR_SPEED = 30; // degrees/s
+    /**
+     * Issues a command to the robot to drive forward.
+     * @return This object (to allow method chaining).
+     */
+    RobotAutonomousControl driveForward();
 
-    public abstract void run();
+    /**
+     * Issues a command to the robot to drive forward for a certain distance (provided in centimeters).
+     * @return This object (to allow method chaining).
+     */
+    RobotAutonomousControl driveForward(double distance);
 
-    public RobotInstructionSet robotInstructionSet;
+    /**
+     * Issues a command to the robot to drive backward.
+     * @return This object (to allow method chaining).
+     */
+    RobotAutonomousControl driveBackward();
 
-    protected void driveForward(Distance distance, Speed speed)
-    {
-        robotInstructionSet.driveForward(distance.value, speed.value);
-    }
+    /**
+     * Issues a command to the robot to drive forward for a certain distance (provided in centimeters).
+     * @return This object (to allow method chaining).
+     */
+    RobotAutonomousControl driveBackward(double distance);
 
-    protected void driveForward(Distance distance)
-    {
-        driveForward(distance.value);
-    }
+    /**
+     * Issues a command to the robot to turn left.
+     * @return This object (to allow method chaining).
+     */
+    RobotAutonomousControl turnLeft();
 
-    protected void driveForward(double distance, double speed)
-    {
-        driveForward(distance(distance, CM), speed(speed, CM_PER_SEC));
-    }
+    /**
+     * Issues a command to the robot to turn left a certain angle (provided in degrees).
+     * @return This object (to allow method chaining).
+     */
+    RobotAutonomousControl turnLeft(double angle);
+    
+    /**
+     * Issues a command to the robot to turn right.
+     * @return This object (to allow method chaining).
+     */
+    RobotAutonomousControl turnRight();
 
-    protected void driveForward(double distance)
-    {
-        driveForward(distance, DEFAULT_MAX_SPEED);
-    }
+    /**
+     * Tells the robot when to stop running the previously issued command.
+     * Specifically, when the method {@link Terminator#shouldTerminate()} returns true, the command will terminate.
+     * @param terminators The terminator(s) to add. Multiple terminators may be added to a single command.
+     * @return This object (to allow method chaining).
+     */
+    RobotAutonomousControl until(Terminator... terminators);
 
-    protected void driveBackward(Distance distance, Speed speed)
-    {
-        robotInstructionSet.driveForward(distance.value, -speed.value);
-    }
+    /**\
+     * Requests a speed for the previously issued command. The unit changes depending on the context.
+     * @param speed The speed given. Contextually assumed to be either degrees per second or centimeters per second.
+     * @return This object (to allow method chaining).
+     */
+    RobotAutonomousControl requestSpeed(double speed);
 
-    protected void driveBackward(Distance distance)
-    {
-        driveBackward(distance.value);
-    }
-
-    protected void driveBackward(double distance, double speed)
-    {
-        driveBackward(distance(distance, CM), speed(speed, CM_PER_SEC));
-    }
-
-    protected void driveBackward(double distance)
-    {
-        driveBackward(distance, DEFAULT_MAX_SPEED);
-    }
-
-    protected void turnLeft(Angle angle, AngularSpeed speed)
-    {
-        robotInstructionSet.turnLeft(angle.value, speed.value);
-    }
-
-    protected void turnLeft(Angle angle)
-    {
-        turnLeft(angle.value);
-    }
-
-    protected void turnLeft(double angle, double speed)
-    {
-        turnLeft(angle(angle, DEGREES), speed(speed, DEGREES_PER_SECOND));
-    }
-
-    protected void turnLeft(double distance)
-    {
-        turnLeft(distance, DEFAULT_MAX_ANGULAR_SPEED);
-    }
-
-    protected void turnRight(Angle angle, AngularSpeed speed)
-    {
-        robotInstructionSet.turnLeft(angle.value, -speed.value);
-    }
-
-    protected void turnRight(Angle angle)
-    {
-        turnRight(angle.value);
-    }
-
-    protected void turnRight(double angle, double speed)
-    {
-        turnRight(angle(angle, DEGREES), speed(speed, DEGREES_PER_SECOND));
-    }
-
-    protected void turnRight(double distance)
-    {
-        turnRight(distance, DEFAULT_MAX_ANGULAR_SPEED);
-    }
-
-    private enum SpeedUnit
-    {
-        CM_PER_SEC, M_PER_SEC
-    }
-    protected static final SpeedUnit CM_PER_SEC = SpeedUnit.CM_PER_SEC;
-    protected static final SpeedUnit CENTIMETERS_PER_SECOND = SpeedUnit.CM_PER_SEC;
-    protected static final SpeedUnit M_PER_SEC = SpeedUnit.M_PER_SEC;
-    protected static final SpeedUnit METERS_PER_SECOND = SpeedUnit.CM_PER_SEC;
-    private static class Speed
-    {
-        double value;
-        private Speed(double value)
-        {
-            this.value = value;
-        }
-    }
-    protected static Speed speed(double value, SpeedUnit unit)
-    {
-        switch (unit)
-        {
-            case CM_PER_SEC:
-                return new Speed(value);
-            case M_PER_SEC:
-                return new Speed(value * 100);
-        }
-        throw new UnsupportedOperationException("Unsupported speed unit: " + unit);
-    }
-
-    private enum DistanceUnit
-    {
-        CM, M
-    }
-    protected static final DistanceUnit CM = DistanceUnit.CM;
-    protected static final DistanceUnit CENTIMETERS = DistanceUnit.CM;
-    protected static final DistanceUnit M = DistanceUnit.M;
-    protected static final DistanceUnit METERS = DistanceUnit.M;
-    private static class Distance
-    {
-        double value;
-        private Distance(double value)
-        {
-            this.value = value;
-        }
-    }
-    protected static Distance distance(double value, DistanceUnit unit)
-    {
-        switch (unit)
-        {
-            case CM:
-                return new Distance(value);
-            case M:
-                return new Distance(value * 100);
-        }
-        throw new UnsupportedOperationException("Unsupported distance unit: " + unit);
-    }
-
-    private enum AngleUnit
-    {
-        DEGREES, RADIANS
-    }
-    protected static final AngleUnit DEG = AngleUnit.DEGREES;
-    protected static final AngleUnit DEGREES = AngleUnit.DEGREES;
-    protected static final AngleUnit RAD = AngleUnit.RADIANS;
-    protected static final AngleUnit RADIANS = AngleUnit.RADIANS;
-    private static class Angle
-    {
-        double value;
-        private Angle(double value)
-        {
-            this.value = value;
-        }
-    }
-    protected static Angle angle(double value, AngleUnit unit)
-    {
-        switch (unit)
-        {
-            case DEGREES:
-                return new Angle(Math.PI * value / 180);
-            case RADIANS:
-                return new Angle(value);
-        }
-        throw new UnsupportedOperationException("Unsupported angle unit: " + unit);
-    }
-
-    private enum AngularSpeedUnit
-    {
-        DEG_PER_SEC, RAD_PER_SEC
-    }
-    protected static final AngularSpeedUnit DEG_PER_SEC = AngularSpeedUnit.DEG_PER_SEC;
-    protected static final AngularSpeedUnit DEGREES_PER_SECOND = AngularSpeedUnit.DEG_PER_SEC;
-    protected static final AngularSpeedUnit RAD_PER_SEC = AngularSpeedUnit.RAD_PER_SEC;
-    protected static final AngularSpeedUnit RADIANS_PER_SECOND = AngularSpeedUnit.RAD_PER_SEC;
-    private static class AngularSpeed
-    {
-        double value;
-        private AngularSpeed(double value)
-        {
-            this.value = value;
-        }
-    }
-    protected AngularSpeed speed(double value, AngularSpeedUnit unit)
-    {
-        switch (unit)
-        {
-            case DEG_PER_SEC:
-                return new AngularSpeed(Math.PI * value / 180);
-            case RAD_PER_SEC:
-                return new AngularSpeed(value);
-        }
-        throw new UnsupportedOperationException("Unsupported angular speed unit: " + unit);
-    }
+    /**
+     * Instructs the robot to execute any queued commands.
+     */
+    void go();
 }

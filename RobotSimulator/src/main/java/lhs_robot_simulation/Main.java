@@ -1,5 +1,9 @@
 package lhs_robot_simulation;
 
+import java.io.File;
+import java.net.URL;
+import java.util.Enumeration;
+
 import lhs_robot_api.SampleRobotAutonomousControl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +22,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         //  load the sim user interface
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sim.fxml"));
+        FXMLLoader loader = new FXMLLoader(new File("RobotSimulator/build/resources/main/lhs_robot_simulation/sim.fxml").toURI().toURL());
         Parent root = loader.load();
         primaryStage.setTitle("Lincoln Robot Simulation");
         primaryStage.setScene(new Scene(root, 850, 900));

@@ -4,17 +4,16 @@
  */
 package lhs_robot_simulation;
 
-import lhs_robot_api.RgbColor;
 import lhs_robot_api.RobotAutonomousControl;
 import lhs_robot_api.RobotInstructionSet;
 import lhs_robot_api.TerminationException;
 
 import java.util.function.BooleanSupplier;
-import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.*;
 
 /** Robot control sequencer to run a sequence of robot motion instructions
  * to the simulated robot.
@@ -106,8 +105,16 @@ public final class RobotSimulationControlSequencer implements RobotInstructionSe
 
                 robotModel.setLocation(
                         robotModel.getX() + power * Math.sin(robotModel.getRot()),
-                        robotModel.getY() + power * Math.cos(robotModel.getRot()));
+                        robotModel.getY() + power * cos(robotModel.getRot()));
+
                 robotModel.setRot(robotModel.getRot() + angularPower);
+
+                // Adjust translation to rotate around center
+                double originalX = -robotModel.getMaxWidth() / 2;
+                double originalY = -robotModel.getMaxHeight() / 2;
+                double newX = originalX * cos(toRadians(angularPower)) - originalY * sin(toRadians(angularPower));
+                double newY = originalX * sin(toRadians(angularPower)) + originalY * cos(toRadians(angularPower));
+                robotModel.setLocation(robotModel.getX() + (newX - originalX), robotModel.getY() + (newY - originalY));
             }
             //  get the  autonomous control thread to terminate, if it hasn't
             synchronized (RobotSimulationControlSequencer.this) {
