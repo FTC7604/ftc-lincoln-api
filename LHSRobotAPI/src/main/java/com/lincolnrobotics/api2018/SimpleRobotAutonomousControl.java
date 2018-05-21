@@ -22,7 +22,7 @@ public interface SimpleRobotAutonomousControl
      * @param id The ID number of the extension, arbitrarily assigned.
      * @param pos How far to extend the robot. This is a number from 0.0 to 1.0, where 1.0 is fully extended and 0.0 is fully retracted.
      */
-    void extend(int id, double pos);
+    void setExtension(int id, double pos);
 
     /**
      * Gets the number of extensions on the robot.

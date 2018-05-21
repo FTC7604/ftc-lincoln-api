@@ -5,15 +5,16 @@ import com.lincolnrobotics.api2018.RobotAutonomousControl;
 import com.lincolnrobotics.api2018.SimpleRobotAutonomousControl;
 
 /**
- * RENAME
+ * An implementation of {@link SimpleRobotAutonomousControl} that uses a provided {@link RobotAutonomousControl} to execute its commands.
+ * Essentially, this class "passes through" all values and provided commands to the given {@link RobotAutonomousControl}
  */
-public class InitialSimpleRobotAutonomousControl implements SimpleRobotAutonomousControl
+public class PassthroughSimpleRobotAutonomousControl implements SimpleRobotAutonomousControl
 {
-    private RobotAutonomousControl control;
+    private RobotAutonomousControl robot;
 
-    public InitialSimpleRobotAutonomousControl(RobotAutonomousControl control)
+    public PassthroughSimpleRobotAutonomousControl(RobotAutonomousControl robot)
     {
-        this.control = control;
+        this.robot = robot;
     }
 
     /**
@@ -23,7 +24,7 @@ public class InitialSimpleRobotAutonomousControl implements SimpleRobotAutonomou
     @Override
     public void drive(double distance)
     {
-        control.driveForward(distance);
+        robot.drive(distance).go();
     }
 
     /**
@@ -33,7 +34,7 @@ public class InitialSimpleRobotAutonomousControl implements SimpleRobotAutonomou
     @Override
     public void rotate(double angle)
     {
-        control.turnRight(angle);
+        robot.rotate(angle).go();
     }
 
     /**
@@ -42,9 +43,9 @@ public class InitialSimpleRobotAutonomousControl implements SimpleRobotAutonomou
      * @param pos How far to extend the robot. This is a number from 0.0 to 1.0, where 1.0 is fully extended and 0.0 is fully retracted.
      */
     @Override
-    public void extend(int id, double pos)
+    public void setExtension(int id, double pos)
     {
-        control.setExtensionPosition(id, pos);
+        robot.setExtension(id, pos).go();
     }
 
     /**
@@ -54,7 +55,7 @@ public class InitialSimpleRobotAutonomousControl implements SimpleRobotAutonomou
     @Override
     public int getExtensionCount()
     {
-        return control.getExtensionCount();
+        return robot.getExtensionCount();
     }
 
     /**
@@ -65,7 +66,7 @@ public class InitialSimpleRobotAutonomousControl implements SimpleRobotAutonomou
     @Override
     public RgbColor senseColor(int id)
     {
-        return control.senseColor(id);
+        return robot.senseColor(id);
     }
 
     /**
@@ -75,6 +76,6 @@ public class InitialSimpleRobotAutonomousControl implements SimpleRobotAutonomou
     @Override
     public int getColorSensorCount()
     {
-        return control.getColorSensorCount();
+        return robot.getColorSensorCount();
     }
 }

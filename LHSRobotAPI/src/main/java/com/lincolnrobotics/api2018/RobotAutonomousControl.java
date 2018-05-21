@@ -9,63 +9,39 @@ public interface RobotAutonomousControl
      * Issues a command to the robot to drive forward.
      * @return This object (to allow method chaining).
      */
-    RobotAutonomousControl driveForward();
+    RobotAutonomousControl drive();
 
     /**
      * Issues a command to the robot to drive forward for a certain distance (provided in centimeters).
      * @return This object (to allow method chaining).
      */
-    RobotAutonomousControl driveForward(double distance);
+    RobotAutonomousControl drive(double distance);
 
-    /**
-     * Issues a command to the robot to drive backward.
-     * @return This object (to allow method chaining).
-     */
-    RobotAutonomousControl driveBackward();
-
-    /**
-     * Issues a command to the robot to drive forward for a certain distance (provided in centimeters).
-     * @return This object (to allow method chaining).
-     */
-    RobotAutonomousControl driveBackward(double distance);
-
-    /**
-     * Issues a command to the robot to turn left (counter-clockwise).
-     * @return This object (to allow method chaining).
-     */
-    RobotAutonomousControl turnLeft();
-
-    /**
-     * Issues a command to the robot to turn left (counter-clockwise) a certain angle (provided in degrees).
-     * @return This object (to allow method chaining).
-     */
-    RobotAutonomousControl turnLeft(double angle);
-    
     /**
      * Issues a command to the robot to turn right (clockwise).
      * @return This object (to allow method chaining).
      */
-    RobotAutonomousControl turnRight();
+    RobotAutonomousControl rotate();
 
     /**
      * Issues a command to the robot to turn right (clockwise) a certain angle (provided in degrees).
      * @return This object (to allow method chaining).
      */
-    RobotAutonomousControl turnRight(double angle);
+    RobotAutonomousControl rotate(double angle);
 
     /**
      * Issues a command to the robot to extend itself.
      * @param id  The ID number of the extension, arbitrarily assigned.
      * @return This object (to allow method chaining).
      */
-    RobotAutonomousControl extendRobot(int id);
+    RobotAutonomousControl extend(int id);
 
     /**
      * Issues a command to the robot to retract itself.
      * @param id  The ID number of the extension, arbitrarily assigned.
      * @return This object (to allow method chaining).
      */
-    RobotAutonomousControl retractRobot(int id);
+    RobotAutonomousControl retract(int id);
 
     /**
      * Issues a command to the robot to extend or retract itself to the provided position.
@@ -73,7 +49,7 @@ public interface RobotAutonomousControl
      * @param pos How far to extend the robot. This is a number from 0.0 to 1.0, where 1.0 is fully extended and 0.0 is fully retracted.
      * @return This object (to allow method chaining).
      */
-    RobotAutonomousControl setExtensionPosition(int id, double pos);
+    RobotAutonomousControl setExtension(int id, double pos);
 
     /**
      * Gets the number of extensions on the robot.
@@ -107,7 +83,7 @@ public interface RobotAutonomousControl
      */
     RobotAutonomousControl until(Terminator... terminators);
 
-    /**\
+    /**
      * Requests a speed for the previously issued command. The unit changes depending on the context.
      * @param speed The speed given. Contextually assumed to be either degrees per second or centimeters per second.
      * @return This object (to allow method chaining).
