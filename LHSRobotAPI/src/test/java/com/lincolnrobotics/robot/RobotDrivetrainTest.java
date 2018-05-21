@@ -1,4 +1,4 @@
-package lhs_robot_api.robot;
+package com.lincolnrobotics.robot;
 
 public class RobotDrivetrainTest
 {

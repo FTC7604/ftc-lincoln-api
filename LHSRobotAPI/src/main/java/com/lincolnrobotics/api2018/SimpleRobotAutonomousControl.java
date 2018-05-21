@@ -1,4 +1,4 @@
-package lhs_robot_api;
+package com.lincolnrobotics.api2018;
 
 /**
  * Defines a simple interface to allow basic control of an FTC robot.
@@ -18,9 +18,9 @@ public interface SimpleRobotAutonomousControl
     void rotate(double angle);
 
     /**
-     * Instructs the robot to extend itself.
+     * Instructs the robot to extend or retract itself.
      * @param id The ID number of the extension, arbitrarily assigned.
-     * @param pos How far to extend the robot. This is a number from 0.0 to 1.0
+     * @param pos How far to extend the robot. This is a number from 0.0 to 1.0, where 1.0 is fully extended and 0.0 is fully retracted.
      */
     void extend(int id, double pos);
 
@@ -35,7 +35,7 @@ public interface SimpleRobotAutonomousControl
      * @param id The ID number of the color sensor, arbitrarily assigned.
      * @return The currently read color from the light sensor.
      */
-    RgbColor getColor(int id);
+    RgbColor senseColor(int id);
 
     /**
      * Gets the number of color sensors on the robot.

@@ -1,4 +1,4 @@
-package lhs_robot_api;
+package com.lincolnrobotics.api2018;
 
 /**
  * CopyRight 2018 bsteele.com

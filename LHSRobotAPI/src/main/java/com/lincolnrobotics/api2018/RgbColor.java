@@ -1,4 +1,4 @@
-package lhs_robot_api;
+package com.lincolnrobotics.api2018;
 
 /**
  * A simple color model to allow the autonomous control software

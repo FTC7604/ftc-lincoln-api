@@ -1,9 +1,9 @@
-package lhs_robot_api;
+package com.lincolnrobotics;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import lhs_robot_api.robot.IdealRobotDrivetrainTest;
+import com.lincolnrobotics.robot.IdealRobotDrivetrainTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses

@@ -4,9 +4,9 @@
  */
 package lhs_robot_simulation;
 
-import lhs_robot_api.RobotAutonomousControl;
-import lhs_robot_api.RobotInstructionSet;
-import lhs_robot_api.TerminationException;
+import com.lincolnrobotics.api2018.RobotAutonomousControl;
+import com.lincolnrobotics.api2018.RobotInstructionSet;
+import com.lincolnrobotics.api2018.TerminationException;
 
 import java.util.function.BooleanSupplier;
 import java.util.logging.Level;

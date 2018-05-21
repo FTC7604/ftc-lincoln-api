@@ -1,4 +1,4 @@
-package lhs_robot_api.robot;
+package com.lincolnrobotics.robot;
 
 import org.junit.Test;
 

@@ -1,10 +1,8 @@
 package lhs_robot_simulation;
 
 import java.io.File;
-import java.net.URL;
-import java.util.Enumeration;
 
-import lhs_robot_api.SampleRobotAutonomousControl;
+import com.lincolnrobotics.SampleRobotAutonomousControl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
