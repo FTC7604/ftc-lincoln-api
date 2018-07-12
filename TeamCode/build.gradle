@@ -15,4 +15,13 @@
 apply from: '../build.common.gradle'
 android {
     buildToolsVersion '27.0.3'
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+// Lincoln API dependencies:
+dependencies {
+    implementation project(':LHSRobotAPI')
 }

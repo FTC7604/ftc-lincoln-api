@@ -1,12 +1,8 @@
-package com.lincolnrobotics.api2018.implementation;
-
-import com.lincolnrobotics.api2018.RgbColor;
-import com.lincolnrobotics.api2018.RobotAutonomousControl;
-import com.lincolnrobotics.api2018.SimpleRobotAutonomousControl;
+package com.lincolnrobotics.api2018;
 
 /**
  * An implementation of {@link SimpleRobotAutonomousControl} that uses a provided {@link RobotAutonomousControl} to execute its commands.
- * Essentially, this class "passes through" all values and provided commands to the given {@link RobotAutonomousControl}
+ * Essentially, this class "passes through" all values and provided commands to the given {@link RobotAutonomousControl}.
  */
 public class PassthroughSimpleRobotAutonomousControl implements SimpleRobotAutonomousControl
 {
@@ -28,13 +24,13 @@ public class PassthroughSimpleRobotAutonomousControl implements SimpleRobotAuton
     }
 
     /**
-     * Instructs the robot to rotate a certain angle.
-     * @param angle The angle to rotate, in degrees. A positive angle corresponds to rotating clockwise; a negative angle corresponds to rotating counterclockwise.
+     * Instructs the robot to turn a certain angle.
+     * @param angle The angle to turn, in degrees. A positive angle corresponds to rotating clockwise; a negative angle corresponds to rotating counterclockwise.
      */
     @Override
     public void rotate(double angle)
     {
-        robot.rotate(angle).go();
+        robot.turn(angle).go();
     }
 
     /**

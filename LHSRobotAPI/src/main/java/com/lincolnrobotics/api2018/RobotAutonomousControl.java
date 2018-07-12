@@ -9,10 +9,17 @@ public interface RobotAutonomousControl
      * Issues a command to the robot to drive forward.
      * @return This object (to allow method chaining).
      */
-    RobotAutonomousControl drive();
+    RobotAutonomousControl driveForward();
+
+    /**
+     * Issues a command to the robot to drive backward.
+     * @return This object (to allow method chaining).
+     */
+    RobotAutonomousControl driveBackward();
 
     /**
      * Issues a command to the robot to drive forward for a certain distance (provided in centimeters).
+     * @param distance The distance to drive, in centimeters. A positive distance corresponds to driving forward; a negative distance corresponds to driving backwards.
      * @return This object (to allow method chaining).
      */
     RobotAutonomousControl drive(double distance);
@@ -21,13 +28,20 @@ public interface RobotAutonomousControl
      * Issues a command to the robot to turn right (clockwise).
      * @return This object (to allow method chaining).
      */
-    RobotAutonomousControl rotate();
+    RobotAutonomousControl turnRight();
+
+    /**
+     * Issues a command to the robot to turn left (counter-clockwise).
+     * @return This object (to allow method chaining).
+     */
+    RobotAutonomousControl turnLeft();
 
     /**
      * Issues a command to the robot to turn right (clockwise) a certain angle (provided in degrees).
+     * @param angle The angle to turn, in degrees. A positive angle corresponds to rotating clockwise; a negative angle corresponds to rotating counterclockwise.
      * @return This object (to allow method chaining).
      */
-    RobotAutonomousControl rotate(double angle);
+    RobotAutonomousControl turn(double angle);
 
     /**
      * Issues a command to the robot to extend itself.
@@ -69,6 +83,31 @@ public interface RobotAutonomousControl
      * @return The number of color sensors on the robot.
      */
     int getColorSensorCount();
+
+    /**
+     * Gets the current distance travelled on a particular DC motor.
+     * @param id The ID number of the motor, arbitrarily assigned.
+     * @return The current distance travelled in CM.
+     */
+    double getDistanceTravelled(int id);
+
+    /**
+     * Resets the encoder (distance travelled value) on one or many particular DC motors.
+     * @param id The ID number(s) of the motor(s), arbitrarily assigned.
+     */
+    void resetMotorDistance(int... id);
+
+    /**
+     * Resets the encoder (distance travelled value) on all DC motors.
+     */
+    void resetAllMotorDistances();
+
+    /**
+     * Gets the number of DC motors on the robot.
+     * @return The number of DC motors on the robot.
+     */
+    int getMotorCount();
+
 
     /**
      * Instructs the robot to stop doing anything.
