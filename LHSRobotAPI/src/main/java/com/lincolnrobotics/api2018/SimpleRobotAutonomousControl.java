@@ -6,23 +6,35 @@ package com.lincolnrobotics.api2018;
 public interface SimpleRobotAutonomousControl
 {
     /**
-     * Instructs the robot to drive a certain distance.
-     * @param distance The distance to drive, in centimeters. A positive distance corresponds to driving forward; a negative distance corresponds to driving backwards.
+     * Issues a command to the robot to drive forward for a certain distance (provided in centimeters).
+     * @param distance The distance to drive, in centimeters.
      */
-    void drive(double distance);
+    void driveForward(double distance);
 
     /**
-     * Instructs the robot to rotate a certain angle.
-     * @param angle The angle to rotate, in degrees. A positive angle corresponds to rotating clockwise; a negative angle corresponds to rotating counterclockwise.
+     * Issues a command to the robot to drive backward for a certain distance (provided in centimeters).
+     * @param distance The distance to drive, in centimeters.
      */
-    void rotate(double angle);
+    void driveBackward(double distance);
 
     /**
-     * Instructs the robot to extend or retract itself.
-     * @param id The ID number of the extension, arbitrarily assigned.
+     * Issues a command to the robot to turn right (clockwise) a certain angle (provided in degrees).
+     * @param angle The angle to turn, in degrees.
+     */
+    void turnRight(double angle);
+
+    /**
+     * Issues a command to the robot to turn left (counter-clockwise) a certain angle (provided in degrees).
+     * @param angle The angle to turn, in degrees.
+     */
+    void turnLeft(double angle);
+
+    /**
+     * Issues a command to the robot to extend or retract itself to the provided position.
+     * @param id  The ID number of the extension, arbitrarily assigned.
      * @param pos How far to extend the robot. This is a number from 0.0 to 1.0, where 1.0 is fully extended and 0.0 is fully retracted.
      */
-    void setExtension(int id, double pos);
+    void extendTo(int id, double pos);
 
     /**
      * Gets the number of extensions on the robot.

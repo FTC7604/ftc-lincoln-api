@@ -19,29 +19,51 @@ public interface RobotAutonomousControl
 
     /**
      * Issues a command to the robot to drive forward for a certain distance (provided in centimeters).
-     * @param distance The distance to drive, in centimeters. A positive distance corresponds to driving forward; a negative distance corresponds to driving backwards.
+     * If a negative distance is passed, the robot should move backward.
+     * @param distance The distance to drive, in centimeters.
      * @return This object (to allow method chaining).
      */
-    RobotAutonomousControl drive(double distance);
+    RobotAutonomousControl driveForward(double distance);
+
+    /**
+     * Issues a command to the robot to drive backward for a certain distance (provided in centimeters).
+     * If a negative distance is passed, the robot should move forward.
+     * @param distance The distance to drive, in centimeters.
+     * @return This object (to allow method chaining).
+     */
+    RobotAutonomousControl driveBackward(double distance);
 
     /**
      * Issues a command to the robot to turn right (clockwise).
+     * Should perform a "point turn"; i.e. the center of the robot does not move.
      * @return This object (to allow method chaining).
      */
     RobotAutonomousControl turnRight();
 
     /**
      * Issues a command to the robot to turn left (counter-clockwise).
+     * Should perform a "point turn"; i.e. the center of the robot does not move.
      * @return This object (to allow method chaining).
      */
     RobotAutonomousControl turnLeft();
 
     /**
      * Issues a command to the robot to turn right (clockwise) a certain angle (provided in degrees).
-     * @param angle The angle to turn, in degrees. A positive angle corresponds to rotating clockwise; a negative angle corresponds to rotating counterclockwise.
+     * If a negative angle is passed, the robot should turn left (counter-clockwise).
+     * Should perform a "point turn"; i.e. the center of the robot does not move.
+     * @param angle The angle to turn, in degrees.
      * @return This object (to allow method chaining).
      */
-    RobotAutonomousControl turn(double angle);
+    RobotAutonomousControl turnRight(double angle);
+
+    /**
+     * Issues a command to the robot to turn left (counter-clockwise) a certain angle (provided in degrees).
+     * If a negative distance is passed, the robot should turn right (clockwise).
+     * Should perform a "point turn"; i.e. the center of the robot does not move.
+     * @param angle The angle to turn, in degrees.
+     * @return This object (to allow method chaining).
+     */
+    RobotAutonomousControl turnLeft(double angle);
 
     /**
      * Issues a command to the robot to extend itself.
@@ -63,7 +85,7 @@ public interface RobotAutonomousControl
      * @param pos How far to extend the robot. This is a number from 0.0 to 1.0, where 1.0 is fully extended and 0.0 is fully retracted.
      * @return This object (to allow method chaining).
      */
-    RobotAutonomousControl setExtension(int id, double pos);
+    RobotAutonomousControl extendTo(int id, double pos);
 
     /**
      * Gets the number of extensions on the robot.
@@ -107,7 +129,6 @@ public interface RobotAutonomousControl
      * @return The number of DC motors on the robot.
      */
     int getMotorCount();
-
 
     /**
      * Instructs the robot to stop doing anything.

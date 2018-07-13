@@ -21,7 +21,19 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
 // Lincoln API dependencies:
 dependencies {
     implementation project(':LHSRobotAPI')
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:2.8.9"
+    testImplementation 'org.powermock:powermock-core:1.7.4'
+    testImplementation 'org.powermock:powermock-api-mockito2:1.7.4'
+    testImplementation 'org.powermock:powermock-module-junit4-rule-agent:1.7.4'
+    testImplementation 'org.powermock:powermock-module-junit4-rule:1.7.4'
+    testImplementation 'org.powermock:powermock-module-junit4:1.7.4'
 }
