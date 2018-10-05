@@ -94,6 +94,13 @@ public interface RobotAutonomousControl
     int getExtensionCount();
 
     /**
+     * Gets the value of the extension.
+     * @param id The ID number of the extension, arbitrarily assigned.
+     * @return
+     */
+    int getExtensionValue(int id);
+
+    /**
      * Gets the currently read color from a particular light sensor.
      * @param id The ID number of the color sensor, arbitrarily assigned.
      * @return The currently read color from the light sensor.
@@ -149,6 +156,13 @@ public interface RobotAutonomousControl
      * @return This object (to allow method chaining).
      */
     RobotAutonomousControl requestSpeed(double speed);
+
+    /**
+     * Declares a secondary action to run after the previously defined main action has been terminated.
+     * @param postExec The secondary action to run.
+     * @return This object (to allow method chaining).
+     */
+    RobotAutonomousControl afterExecution(Runnable postExec);
 
     /**
      * Instructs the robot to execute any queued commands.

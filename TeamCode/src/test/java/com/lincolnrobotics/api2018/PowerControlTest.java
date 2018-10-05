@@ -28,6 +28,8 @@ public class PowerControlTest
     @Test
     public void testPIDPowerControl()
     {
+        // PIDMotorPowerControl uses System.currentTimeMillis().
+        // If this changes¸ this test will likely fail. Update the test if that is the case.
         PowerMockito.mockStatic(System.class);
 
         PIDMotorPowerControl pmvc = new PIDMotorPowerControl(1, 1, 1, 1);
@@ -70,6 +72,7 @@ public class PowerControlTest
     public void testRampingPowerControl()
     {
         // Mock the intended behavior of BasicMotorPowerControl without depending on it
+        // Provides an implementation of MotorPowerControl that always returns the target speed
         MotorPowerControl baseControl = mock(MotorPowerControl.class);
         when(baseControl.calculateMotorPower(anyDouble(), anyDouble())).thenAnswer(invocation -> invocation.getArguments()[1]);
 
